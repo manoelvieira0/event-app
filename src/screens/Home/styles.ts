@@ -15,5 +15,14 @@ export const styles = StyleSheet.create({
   eventDate: {
     color: '#6b6b6b',
     fontSize: 16,
+  },
+  input: {
+    height: 56,
+    backgroundColor: '#1F1E25',
+    color: '#FDFCFF',
+    fontSize: 16,
+    borderRadius: 5,
+    padding: 16,
+    marginTop: 24
   }
 })
