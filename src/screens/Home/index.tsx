@@ -5,22 +5,24 @@ import { Participant } from '../../components/Participant';
 import { useState } from 'react';
 
 export function Home() {
-  const [participant, setParticipant] = useState(['Manoel'])
+  const [participant, setParticipant] = useState<string[]>([])
+  const [participantName, setParticipantName] = useState('')
 
   function handleParticipantAdd() {
-    if(participant.includes('Manoel')){
+    if (participant.includes(participantName)) {
       return Alert.alert("Participante já existe.")
     }
 
-    setParticipant([...participant, 'Méssia'])
+    setParticipant([...participant, participantName])
+    setParticipantName('')
   }
 
   function handleParticipantRemove(name: string) {
     Alert.alert("Remover", `Remover participante ${name}?`, [
-      { text: "Não", onPress: () => {}, style: "cancel" },
+      { text: "Não", onPress: () => { }, style: "cancel" },
       {
         text: "Sim", onPress: () => {
-          
+
         }
       }
     ])
@@ -39,7 +41,8 @@ export function Home() {
           placeholder='Nome do participante'
           placeholderTextColor="#6B6B6B"
           style={styles.input}
-        />
+          onChangeText={setParticipantName}
+          value={participantName} />
         <TouchableOpacity style={styles.button} onPress={handleParticipantAdd}>
           <Text style={styles.buttonText}>
             +
@@ -59,9 +62,9 @@ export function Home() {
         showsVerticalScrollIndicator={false}
         ListEmptyComponent={() => {
           return (
-              <Text style={styles.listEmptyText}>
-               Ninguém chegou no evento ainda? Adicione participantes a sua lista de presença.
-              </Text>
+            <Text style={styles.listEmptyText}>
+              Ninguém chegou no evento ainda? Adicione participantes a sua lista de presença.
+            </Text>
           )
         }}
       />
