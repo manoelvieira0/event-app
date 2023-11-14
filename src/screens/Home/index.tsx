@@ -18,11 +18,13 @@ export function Home() {
   }
 
   function handleParticipantRemove(name: string) {
+    const newListParticipant = participant.filter(participant => participant !== name)
+
     Alert.alert("Remover", `Remover participante ${name}?`, [
       { text: "Não", onPress: () => { }, style: "cancel" },
       {
         text: "Sim", onPress: () => {
-
+          setParticipant(newListParticipant)
         }
       }
     ])
@@ -43,6 +45,7 @@ export function Home() {
           style={styles.input}
           onChangeText={setParticipantName}
           value={participantName} />
+
         <TouchableOpacity style={styles.button} onPress={handleParticipantAdd}>
           <Text style={styles.buttonText}>
             +
