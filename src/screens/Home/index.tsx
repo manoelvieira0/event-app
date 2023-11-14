@@ -2,14 +2,17 @@ import { Text, View, TextInput, TouchableOpacity, FlatList, Alert } from 'react-
 import { styles } from './styles';
 
 import { Participant } from '../../components/Participant';
+import { useState } from 'react';
 
 export function Home() {
-  const participants = ['Manoel', 'Méssia', 'Pérola', 'Chica']
+  const [participant, setParticipant] = useState(['Manoel'])
 
   function handleParticipantAdd() {
-    if(participants.includes("Manoel")){
-      return Alert.alert("Participante já existe", "Já existe um participante com esse nome na lista.")
+    if(participant.includes('Manoel')){
+      return Alert.alert("Participante já existe.")
     }
+
+    setParticipant([...participant, 'Méssia'])
   }
 
   function handleParticipantRemove(name: string) {
@@ -17,7 +20,7 @@ export function Home() {
       { text: "Não", onPress: () => {}, style: "cancel" },
       {
         text: "Sim", onPress: () => {
-          participants.splice(participants.indexOf(name), 1)
+          
         }
       }
     ])
@@ -45,7 +48,7 @@ export function Home() {
       </View>
 
       <FlatList
-        data={participants}
+        data={participant}
         keyExtractor={item => item}
         renderItem={({ item }) => (
           <Participant
